@@ -43,6 +43,8 @@ Thumbs.db
 
 .idea/
 node_modules/
+app/*.*
+npm-debug.log.*
 YoutubeTutorial-win32-x64/
 
 # frontend #

@@ -8,4 +8,6 @@ app.on('ready', ()=> {
         width: 400,
         height: 400
     });
+
+    WIN.loadURL(`file://${__dirname}/app/index.html`);
 });

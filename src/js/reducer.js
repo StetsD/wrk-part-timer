@@ -14,5 +14,6 @@ let appReducer = (state = initialState, action) => {
 
 
 export default combineReducers({
+    routing: routerReducer,
     appReducer
 })

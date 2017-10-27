@@ -1,5 +1,23 @@
-1) Проработать Интерфейс
-2) Реализовать цепочки таймеров с засечками
-3) Выбор Звонка
-4) Смена цвета
-5) 
+Mode:
+1) Timeout
+2) Chain
+4) Stopwatch
+
+Common:
+1) start
+2) pause
+3) stop
+4) reload
+
+Timeout mode:
+1) setTime
+2) setAlarm
+
+Chain mode:
+1) setTime
+2) setPartsCount
+3) setChainInterval
+    3.1) setIntervalsCount
+
+Stopwatch mode:
+1) getExactTime
