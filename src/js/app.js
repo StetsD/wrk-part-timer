@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, dispatch} from 'react-redux';
-import {Timer} from './components/';
+import {Timer, Controls} from './components/';
 
 
 class App extends Component{
@@ -10,7 +10,8 @@ class App extends Component{
 
     render(){
         return(
-            <div>
+            <div className="app">
+                <Controls/>
                 <Timer/>
             </div>
         )

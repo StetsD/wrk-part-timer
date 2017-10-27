@@ -11,13 +11,15 @@ Common:
 
 Timeout mode:
 1) setTime
-2) setAlarm
+2) setAlarmEnd (default)
 
 Chain mode:
 1) setTime
 2) setPartsCount
 3) setChainInterval
-    3.1) setIntervalsCount
+    3.1) setIntervalsCount (default)
+    3.2) setAlarmStep (default)
+
 
 Stopwatch mode:
 1) getExactTime

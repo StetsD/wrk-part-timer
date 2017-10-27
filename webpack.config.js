@@ -1,15 +1,22 @@
 const path = require('path');
-
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const HtmlWebpackConfig = new HtmlWebpackPlugin({
     template: './src/index.html',
     filename: 'index.html',
     inject: 'body'
 });
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
+});
+
+const ProvidePlugin = new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    "window.jQuery": 'jquery'
 });
 
 module.exports = {
@@ -23,12 +30,16 @@ module.exports = {
         loaders: [
             {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
             {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
-            {test: /\.scss|.sass$/, use: [
-                {loader: "style-loader"}, {loader: "css-loader"}, {loader: "sass-loader"}
+            {test: /\.s[ac]ss$/, use: [
+                {loader: "style-loader"},
+                {loader: "css-loader"},
+                {loader: "sass-loader", options: {
+                    includePaths: ['./node_modules/semantic-ui-sass/semantic-ui.scss']
+                }}
             ]}
         ]
     },
     plugins: [
-        HtmlWebpackConfig, extractSass
+        HtmlWebpackConfig, extractSass, ProvidePlugin
     ]
 }

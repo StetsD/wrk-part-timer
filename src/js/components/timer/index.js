@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Chart from 'chart.js';
+import style from './style.scss';
 
 export default class Timer extends Component{
     constructor(props){
@@ -36,7 +37,9 @@ export default class Timer extends Component{
 
     render(){
         return(
-            <canvas id="timeline"></canvas>
+            <div className="app__timeline">
+                <canvas id="timeline"></canvas>
+            </div>
         )
     }
 }
