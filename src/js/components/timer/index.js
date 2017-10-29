@@ -47,7 +47,10 @@ class Timer extends Component{
 
 let appState = (state) => {
 	return {
-		appReducer: state.appReducer
+		time: state.time,
+        ctrlStart: state.ctrlStart,
+		ctrlPause: state.ctrlPause,
+		ctrlStop: state.ctrlStop
 	}
 }
 

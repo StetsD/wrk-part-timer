@@ -22,4 +22,10 @@ class App extends Component{
     }
 }
 
-export default connect(state => state)(App);
+let appState = state => {
+    return {
+        appReducer: state.appReducer
+    }
+}
+
+export default connect(appState)(App);
