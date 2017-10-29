@@ -1,0 +1,14 @@
+.app{
+
+	&__settings{
+		width: 200px;
+    	margin: 40px 0 0 0;
+	}
+
+	&__settings-time{
+		& input{
+		    width: 70px !important;
+		}
+	}
+
+}

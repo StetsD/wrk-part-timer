@@ -7,7 +7,6 @@ Common:
 1) start
 2) pause
 3) stop
-4) reload
 
 Timeout mode:
 1) setTime
@@ -23,3 +22,19 @@ Chain mode:
 
 Stopwatch mode:
 1) getExactTime
+
+
+//-----------------------
+
+STATE
+-Time
+-mode
+
+ACTIONS
+-play
+-pause
+-stop
+-tick
+-changeMode
+-setChain
+-setAlarm

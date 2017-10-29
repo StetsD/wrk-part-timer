@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import {connect, dispatch} from 'react-redux';
 import Chart from 'chart.js';
 import style from './style.scss';
 
-export default class Timer extends Component{
+class Timer extends Component{
     constructor(props){
         super(props);
         this.round = null;
@@ -43,3 +44,11 @@ export default class Timer extends Component{
         )
     }
 }
+
+let appState = (state) => {
+	return {
+		appReducer: state.appReducer
+	}
+}
+
+export default connect(appState)(Timer)

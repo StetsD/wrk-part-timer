@@ -2,3 +2,13 @@ body{
     overflow: hidden;
     font-family: 'Open Sans', sans-serif;
 }
+
+.app{
+	&__inner{
+		display: flex;
+		width: 850px;
+		flex-wrap: wrap;
+	    justify-content: center;
+		position: relative;
+	}
+}
