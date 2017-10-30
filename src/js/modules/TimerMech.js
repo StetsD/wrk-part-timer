@@ -4,21 +4,28 @@ function secSummary(time){
 
 export default class TimerMech{
 	constructor(){
+		this.state = 'stop',
 		this.time = 0;
 		this.timer;
 		this.timerChain;
 		this.stopwatch;
 	}
 
-	initTimer(time, cb, tickAction, completeAction){
+	initTimer(time, dispatch, tickAction){
 		let summary = secSummary(time);
 		let that = this;
-		if(summary){
-			this.time = summary + 1;
+
+		if(summary && this.state == 'stop'){
+			this.state = 'run';
+			this.summary = summary;
+			this.time = summary;
+
+			dispatch(tickAction(that.time));
+
 			this.timer = setTimeout(function run(){
 				that.time = that.time - 1;
 
-				cb(tickAction(that.time));
+				dispatch(tickAction(that.time));
 				that.timer = setTimeout(run, 1000);
 
 				that.time === 0 && that.destroyTimer();
@@ -35,14 +42,15 @@ export default class TimerMech{
 	}
 
 	destroyTimer(){
+		this.state = 'stop';
 		clearTimeout(this.timer);
 	}
 
 	destroyTimerChain(){
-
+		this.state = 'stop';
 	}
 
 	destroyStopwatch(){
-
+		this.state = 'stop';
 	}
 }

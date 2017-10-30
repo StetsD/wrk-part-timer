@@ -26,10 +26,10 @@ class Controls extends Component{
         let {mode, timerTime} = this.props;
         switch(type){
             case 'play':
-                this.props.dispatch(start());
-                mode === 'timer' && timerMech.initTimer(timerTime, this.props.dispatch.bind(this), tick, stop);
+                mode === 'timer' && timerMech.initTimer(timerTime, this.props.dispatch.bind(this), tick);
                 mode === 'timer-chain' && timerMech.initTimerChain();
                 mode === 'stopwatch' && timerMech.initStopwatch();
+                this.props.dispatch(start(timerMech.summary));
                 break;
             case 'pause':
                 this.props.dispatch(pause());
@@ -47,9 +47,6 @@ class Controls extends Component{
 
 
     render(){
-        // let {ctrlStop} = this.props;
-        // ctrlStop && this.actCtrl('stop');
-
         return(
             <div className="app__controls">
                 <Button.Group>
@@ -66,8 +63,7 @@ class Controls extends Component{
 let appState = (state) => {
     return {
         mode: state.appReducer.mode,
-        timerTime: state.appReducer.timerTime,
-        ctrlStop: state.appReducer.ctrlStop
+        timerTime: state.appReducer.timerTime
     }
 };
 

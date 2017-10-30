@@ -49,11 +49,11 @@ class Settings extends Component{
                             </Form.Field>
                             <Form.Field>
                                 <label>M</label>
-                                <Input type="number" onChange={this.handleChangeTime} min="0" name="M" placeholder="00"/>
+                                <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="M" placeholder="00"/>
                             </Form.Field>
                             <Form.Field>
                                 <label>S</label>
-                                <Input type="number" onChange={this.handleChangeTime} min="0" name="S" placeholder="00"/>
+                                <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="S" placeholder="00"/>
                             </Form.Field>
                         </Form.Group> : null
                     }

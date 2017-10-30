@@ -8,29 +8,35 @@ class Values extends Component{
 		super(props);
 	}
 
+	parseSummaryTime(val){
+		return {
+			hh: Math.trunc(val / 3600),
+			mm: Math.trunc((val % 3600) / 60),
+			ss: (val % 3600) % 60
+		}
+	}
+
 	render(){
+		let {ctrlStart, timeDynamic} = this.props;
+		let {hh, mm, ss} = this.parseSummaryTime(timeDynamic);
+
 		return(
 			<div className="app__values">
 				<Statistic.Group>
 					<Statistic>
-						<Statistic.Value>00</Statistic.Value>
+						<Statistic.Value>{(hh < 10 ? `0${hh}` : hh)}</Statistic.Value>
 						<Statistic.Label>H</Statistic.Label>
 					</Statistic>
 					<Statistic>
-						<Statistic.Value>00</Statistic.Value>
+						<Statistic.Value>{(mm < 10 ? `0${mm}` : mm)}</Statistic.Value>
 						<Statistic.Label>M</Statistic.Label>
 					</Statistic>
-				</Statistic.Group>
-				<Statistic.Group>
 					<Statistic>
-						<Statistic.Value>00</Statistic.Value>
+						<Statistic.Value>{(ss < 10 ? `0${ss}` : ss)}</Statistic.Value>
 						<Statistic.Label>S</Statistic.Label>
 					</Statistic>
-					<Statistic>
-						<Statistic.Value>00</Statistic.Value>
-						<Statistic.Label>MS</Statistic.Label>
-					</Statistic>
 				</Statistic.Group>
+
 			</div>
 
 		)
@@ -39,10 +45,10 @@ class Values extends Component{
 
 let appState = (state) => {
 	return {
-		time: state.time,
-		ctrlStart: state.ctrlStart,
-		ctrlPause: state.ctrlPause,
-		ctrlStop: state.ctrlStop
+		timeDynamic: state.appReducer.timeDynamic,
+		ctrlStart: state.appReducer.ctrlStart,
+		ctrlPause: state.appReducer.ctrlPause,
+		ctrlStop: state.appReducer.ctrlStop
 	}
 }
 

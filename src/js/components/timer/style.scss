@@ -1,5 +1,34 @@
+@import '../../../css/mixins.scss';
+
 .app{
     &__timeline{
+        margin: 101px 0 0 0px;
+    }
+
+    &__timeline-inner{
+        overflow: hidden;
         width: 400px;
+        height: 30px;
+        border: 1px solid #cccccc;
+        @include border-radius(5px);
+    }
+
+    &__timeline-prg{
+        width:0%;
+        height: 100%;
+        background-color: #43A047;
+        @include transition(all 0.2s linear);
+        &.on_25{
+            background-color: #FDD835;
+        }
+        &.on_50{
+            background-color: #F57F17;
+        }
+        &.on_75{
+            background-color: #F4511E;
+        }
+        &.on_100{
+            background-color: #BF360C;
+        }
     }
 }

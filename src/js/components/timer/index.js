@@ -3,53 +3,45 @@ import {connect, dispatch} from 'react-redux';
 import Chart from 'chart.js';
 import style from './style.scss';
 
+let colorMap = {
+    25: '#43A047',
+    50: '#FDD835',
+    75: '#F57F17',
+    100: '#F4511E'
+};
+
+function getSpecifyColor(val){
+    for(var key in colorMap){
+        if(val < +key){
+            return colorMap[key];
+        }
+    }
+}
+
 class Timer extends Component{
     constructor(props){
         super(props);
-        this.round = null;
     }
 
     componentDidMount(){
-        let elem = document.getElementById('timeline').getContext('2d');
 
-        if(!this.round){
-            this.round = new Chart(elem, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [5],
-                        backgroundColor: ['rgb(255, 99, 132)'],
-                    }],
-                },
-                options: {
-                    cutoutPercentage: 90,
-                    animation:{
-                        animateRotate: true,
-                        duration: 8000,
-                        easing: 'linear',
-                        onComplete: function(animation){
-
-                        }
-                    }
-                }
-            })
-        }
     }
 
     render(){
-		// if(this.round){
-        //     let {ctrlStart, ctrlPause, ctrlStop} = this.props;
-        //
-        //
-        //     if(ctrlStart){
-        //         this.round.options.animation.duration =
-        //     }
-        //
-        //
-        // }
+        let {time, timeDynamic} = this.props;
+        let val = (1 - (timeDynamic / time)) * 100;
+        let valColor = getSpecifyColor(+val.toFixed(1));
+
+
         return(
             <div className="app__timeline">
-                <canvas id="timeline"></canvas>
+                <div className="app__timeline-inner">
+                    <div className="app__timeline-prg"
+                        style={{
+                            width: `${val}%`,
+                            backgroundColor: valColor
+                        }}></div>
+                </div>
             </div>
         )
     }
@@ -58,10 +50,10 @@ class Timer extends Component{
 let appState = (state) => {
 	return {
 		time: state.appReducer.time,
-        ctrlStart: state.appReducer.ctrlStart,
-		ctrlPause: state.appReducer.ctrlPause,
-		ctrlStop: state.appReducer.ctrlStop,
-		timerTime: state.appReducer.timerTime
+        // ctrlStart: state.appReducer.ctrlStart,
+		// ctrlPause: state.appReducer.ctrlPause,
+		// ctrlStop: state.appReducer.ctrlStop,
+		timeDynamic: state.appReducer.timeDynamic
 	}
 }
 

@@ -3,9 +3,10 @@ export const PAUSE = 'PAUSE';
 export const STOP = 'STOP';
 export const TICK = 'TICK';
 
-export function start(){
+export function start(summary){
 	return {
-		type: START
+		type: START,
+		summary
 	}
 }
 
