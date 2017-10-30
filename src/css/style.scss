@@ -7,12 +7,16 @@ body{
 
 .app{
 	&__inner{
-		display: flex;
-		width: 850px;
-		flex-wrap: wrap;
-	    justify-content: center;
+	    width: 775px;
 		position: relative;
+        overflow: hidden;
+        height: 330px;
 	}
+
+    &__main-interface{
+        display: flex;
+        align-items: center;
+    }
 
 	.hide{
 		display: none;

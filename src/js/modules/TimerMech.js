@@ -15,7 +15,9 @@ export default class TimerMech{
 		let summary = secSummary(time);
 		let that = this;
 
-		if(summary && this.state == 'stop'){
+		that.destroyTimer();
+
+		if(summary){
 			this.state = 'run';
 			this.summary = summary;
 			this.time = summary;

@@ -23,15 +23,15 @@ class Values extends Component{
 		return(
 			<div className="app__values">
 				<Statistic.Group>
-					<Statistic>
+					<Statistic size='mini'>
 						<Statistic.Value>{(hh < 10 ? `0${hh}` : hh)}</Statistic.Value>
 						<Statistic.Label>H</Statistic.Label>
 					</Statistic>
-					<Statistic>
+					<Statistic size='mini'>
 						<Statistic.Value>{(mm < 10 ? `0${mm}` : mm)}</Statistic.Value>
 						<Statistic.Label>M</Statistic.Label>
 					</Statistic>
-					<Statistic>
+					<Statistic size='mini'>
 						<Statistic.Value>{(ss < 10 ? `0${ss}` : ss)}</Statistic.Value>
 						<Statistic.Label>S</Statistic.Label>
 					</Statistic>

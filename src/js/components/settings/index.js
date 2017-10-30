@@ -29,55 +29,58 @@ class Settings extends Component{
         return(
             <div className="app__settings">
                 <Form>
-                    <Form.Field><strong>Select mode</strong></Form.Field>
-                    <Form.Field>
-                        <Radio label="Timer" onChange={this.handleChangeMode} checked={mode === 'timer'} name="appMode" value="timer"></Radio>
-                    </Form.Field>
-                    <Form.Field>
-                        <Radio label="Timer-Chain" onChange={this.handleChangeMode} checked={mode === 'timer-chain'} name="appMode" value="timer-chain"></Radio>
-                    </Form.Field>
-                    <Form.Field>
-                        <Radio label="Stopwatch" onChange={this.handleChangeMode} checked={mode === 'stopwatch'} name="appMode" value="stopwatch"></Radio>
-                    </Form.Field>
+                    <div className="app__main-settings">
+                        <Form.Field><strong>Select mode</strong></Form.Field>
+                        <Form.Field>
+                            <Radio label="Timer" onChange={this.handleChangeMode} checked={mode === 'timer'} name="appMode" value="timer"></Radio>
+                        </Form.Field>
+                        <Form.Field>
+                            <Radio label="Timer-Chain" onChange={this.handleChangeMode} checked={mode === 'timer-chain'} name="appMode" value="timer-chain"></Radio>
+                        </Form.Field>
+                        <Form.Field>
+                            <Radio label="Stopwatch" onChange={this.handleChangeMode} checked={mode === 'stopwatch'} name="appMode" value="stopwatch"></Radio>
+                        </Form.Field>
+                    </div>
 
-                    {/* Timeout mode */}
-                    {mode === 'timer' ?
-                        <Form.Group className="app__settings-time">
-                            <Form.Field>
-                                <label>H</label>
-                                <Input type="number" onChange={this.handleChangeTime} min="0" name="H" placeholder="00"/>
-                            </Form.Field>
-                            <Form.Field>
-                                <label>M</label>
-                                <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="M" placeholder="00"/>
-                            </Form.Field>
-                            <Form.Field>
-                                <label>S</label>
-                                <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="S" placeholder="00"/>
-                            </Form.Field>
-                        </Form.Group> : null
-                    }
-
-
-                    {/* Set Interval */}
-                    {mode === 'timer-chain' ?
-                        <Form.Group>
-                            <Form.Field>
-                                <Button>Set Chain</Button>
-                            </Form.Field>
-                        </Form.Group> : null
-                    }
+                    <div className="app__main-sub-settings">
+                        {/* Timeout mode */}
+                        {mode === 'timer' ?
+                            <Form.Group className="app__settings-time">
+                                <Form.Field>
+                                    <label>H</label>
+                                    <Input type="number" onChange={this.handleChangeTime} min="0" name="H" placeholder="00"/>
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>M</label>
+                                    <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="M" placeholder="00"/>
+                                </Form.Field>
+                                <Form.Field>
+                                    <label>S</label>
+                                    <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="S" placeholder="00"/>
+                                </Form.Field>
+                            </Form.Group> : null
+                        }
 
 
-                    {/* Set alarm */}
-                    {mode === 'timer' ?
-                        <Form.Group>
-                            <Form.Field>
-                                <Button>Set Alarm</Button>
-                            </Form.Field>
-                        </Form.Group> : null
-                    }
+                        {/* Set Interval */}
+                        {mode === 'timer-chain' ?
+                            <Form.Group>
+                                <Form.Field>
+                                    <Button>Set Chain</Button>
+                                </Form.Field>
+                            </Form.Group> : null
+                        }
 
+
+                        {/* Set alarm */}
+                        {mode === 'timer' ?
+                            <Form.Group className="app__settings-set-alarm">
+                                <Form.Field>
+                                    <Button>Set Alarm</Button>
+                                </Form.Field>
+                            </Form.Group> : null
+                        }
+                    </div>
                 </Form>
             </div>
         )

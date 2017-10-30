@@ -1,8 +1,27 @@
 .app{
 
 	&__settings{
-		width: 200px;
-    	margin: 40px 0 0 0;
+		width: 100%;
+    	margin: 0 0 0 0;
+	}
+
+	&__settings .form{
+	    display: flex;
+	}
+
+	&__main-settings{
+	    margin: 0 50px 0 10px;
+	}
+
+	&__main-sub-settings{
+		margin: 0 0 0 0;
+		display: flex;
+	}
+
+	&__settings-set-alarm{
+		position: relative;
+	    top: 23px;
+	    left: 20px;
 	}
 
 	&__settings-time{

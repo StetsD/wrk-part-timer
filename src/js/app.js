@@ -12,10 +12,12 @@ class App extends Component{
         return(
             <div className="app">
 				<div className="app__inner">
-					<Settings/>
-                	<Timer/>
-                    <Values/>
-					<Controls/>
+                    <div className="app__main-interface">
+                        <Controls/>
+                        <Timer/>
+                        <Values/>
+                    </div>
+                    <Settings/>
 				</div>
             </div>
         )

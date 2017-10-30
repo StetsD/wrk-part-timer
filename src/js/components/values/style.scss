@@ -1,12 +1,13 @@
 .app{
 	&__values{
-		width: 200px;
-		padding-left: 40px;
-		margin: 30px 0 0 0;
+		width: 240px;
+		padding-left: 0px;
+		margin: 0 0 0 17px;
+		position: relative;
+		top: 8px;
 	}
 
-	& .statistics{
-		display: flex;
-		justify-content: center;
+	& .statistics .statistic{
+		margin: 0 10px !important;
 	}
 }
