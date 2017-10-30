@@ -10,22 +10,36 @@ class Settings extends Component{
         super(props);
         this.handleChangeMode = this.handleChangeMode.bind(this);
         this.handleChangeTime = this.handleChangeTime.bind(this);
+        this.state = {
+            timerTime: {
+                H: 0,
+                M: 0,
+                S: 0
+            }
+        }
     }
 
     static propTypes = {
         dispatch: PropTypes.func.isRequired
     }
 
+
+
     handleChangeMode(e, {value}){
 		this.props.dispatch(changeMode(value));
     }
 
     handleChangeTime(e, elem){
-        this.props.dispatch(changeTimerTime(elem.name, elem.value));
+        let {name, value} = elem;
+        this.props.dispatch(changeTimerTime(name, value));
+
+        let timerTime = this.state.timerTime;
+        timerTime[name] = +value;
+        this.setState({timerTime});
     }
 
     render(){
-        let {mode} = this.props;
+        let {mode, timerTime} = this.props;
         return(
             <div className="app__settings">
                 <Form>
@@ -48,15 +62,15 @@ class Settings extends Component{
                             <Form.Group className="app__settings-time">
                                 <Form.Field>
                                     <label>H</label>
-                                    <Input type="number" onChange={this.handleChangeTime} min="0" name="H" placeholder="00"/>
+                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.H} min="0" name="H" placeholder="0"/>
                                 </Form.Field>
                                 <Form.Field>
                                     <label>M</label>
-                                    <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="M" placeholder="00"/>
+                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.M} min="0" max="60" name="M" placeholder="0"/>
                                 </Form.Field>
                                 <Form.Field>
                                     <label>S</label>
-                                    <Input type="number" onChange={this.handleChangeTime} min="0" max="60" name="S" placeholder="00"/>
+                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.S} min="0" max="60" name="S" placeholder="0"/>
                                 </Form.Field>
                             </Form.Group> : null
                         }
@@ -90,7 +104,8 @@ class Settings extends Component{
 
 let appState = (state) => {
 	return {
-		mode: state.appReducer.mode
+		mode: state.appReducer.mode,
+        timerTime: state.appReducer.timerTime
 	}
 };
 
