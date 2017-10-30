@@ -1,36 +1,28 @@
-function secSummary(time){
-		return +(time.H * 3600) + +(time.M * 60) + +time.S;
-}
+import store from '../store';
 
 export default class TimerMech{
-	constructor(){
-		this.state = 'stop',
+	constructor(store){
+		this.state = 'stop';
 		this.time = 0;
 		this.timer;
 		this.timerChain;
 		this.stopwatch;
 	}
 
-	initTimer(time, dispatch, tickAction){
-		let summary = secSummary(time);
+	initTimer(summary, dispatch, tickAction){
 		let that = this;
 
-		that.destroyTimer();
-
 		if(summary){
+			that.destroyTimer();
 			this.state = 'run';
-			this.summary = summary;
-			this.time = summary;
 
-			dispatch(tickAction(that.time));
+			dispatch(tickAction(summary));
 
 			this.timer = setTimeout(function run(){
-				that.time = that.time - 1;
-
-				dispatch(tickAction(that.time));
+				dispatch(tickAction());
 				that.timer = setTimeout(run, 1000);
 
-				that.time === 0 && that.destroyTimer();
+				store.getState().appReducer.timeDynamic === 0 && that.destroyTimer();
 			}, 1000);
 		}
 	}
@@ -41,6 +33,10 @@ export default class TimerMech{
 
 	initStopwatch(){
 		console.log('init stopwatch');
+	}
+
+	pauseTimer(){
+		this.destroyTimer();
 	}
 
 	destroyTimer(){

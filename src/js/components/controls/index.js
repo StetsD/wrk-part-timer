@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button} from 'semantic-ui-react';
 import {start, pause, stop, tick} from './actions';
+import {secSummary} from '../../modules/customizeModule';
 import TimerMech from '../../modules/TimerMech';
 import './style.scss';
 
@@ -23,15 +24,19 @@ class Controls extends Component{
     }
 
     actCtrl(type){
-        let {mode, timerTime} = this.props;
+        let {mode, timerTime, ctrlStart, ctrlPause, timeDynamic, time} = this.props;
+        let summary = secSummary(timerTime);
+        let timeCorrect = ctrlPause ? timeDynamic : summary;
+
         switch(type){
             case 'play':
-                mode === 'timer' && timerMech.initTimer(timerTime, this.props.dispatch.bind(this), tick);
+                mode === 'timer' && timerMech.initTimer(timeCorrect, this.props.dispatch.bind(this), tick);
                 mode === 'timer-chain' && timerMech.initTimerChain();
                 mode === 'stopwatch' && timerMech.initStopwatch();
-                this.props.dispatch(start(timerMech.summary));
+                this.props.dispatch(start(summary));
                 break;
             case 'pause':
+                mode === 'timer' && timerMech.pauseTimer();
                 this.props.dispatch(pause());
                 break;
             case 'stop':
@@ -63,7 +68,11 @@ class Controls extends Component{
 let appState = (state) => {
     return {
         mode: state.appReducer.mode,
-        timerTime: state.appReducer.timerTime
+        time: state.appReducer.time,
+        timerTime: state.appReducer.timerTime,
+        timeDynamic: state.appReducer.timeDynamic,
+        ctrlPause: state.appReducer.ctrlPause,
+        ctrlStart: state.appReducer.ctrlStart
     }
 };
 

@@ -19,7 +19,6 @@ const initialState = {
 }
 
 let appReducer = (state = initialState, action) => {
-    // console.log(state, action)
     switch(action.type){
         case CHANGE_MODE:
             return {...state, mode: action.payload, timerTime: {H:0,M:0,S:0}, ctrlStop: true, ctrlPause: false, ctrlStart: false};
@@ -33,9 +32,10 @@ let appReducer = (state = initialState, action) => {
         case PAUSE:
             return {...state, ctrlPause: true, ctrlStart: false, ctrlStop: false};
         case STOP:
-            return {...state, ctrlStop: true, ctrlPause: false, ctrlStart: false, timeDynamic: 0};
+            return {...state, ctrlStop: true, ctrlPause: false, ctrlStart: false, time: 0, timeDynamic: 0};
         case TICK:
-            return {...state, timeDynamic: action.val};
+			console.log(action)
+            return {...state, timeDynamic: state.timeDynamic - 1};
         default:
             return state;
     }
