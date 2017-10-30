@@ -17,7 +17,7 @@ export function pause(){
 }
 
 export function stop(){
-	return{
+	return{ 
 		type: STOP
 	}
 }
