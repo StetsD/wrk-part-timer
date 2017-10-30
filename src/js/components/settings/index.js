@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect, dispatch} from 'react-redux';
 import {Form, Radio, Input, Button} from 'semantic-ui-react';
-import {changeMode} from './actions';
+import {changeMode, changeTimerTime} from './actions';
 import './style.scss';
 
 class Settings extends Component{
     constructor(props){
         super(props);
         this.handleChangeMode = this.handleChangeMode.bind(this);
+        this.handleChangeTime = this.handleChangeTime.bind(this);
     }
 
     static propTypes = {
@@ -17,6 +18,10 @@ class Settings extends Component{
 
     handleChangeMode(e, {value}){
 		this.props.dispatch(changeMode(value));
+    }
+
+    handleChangeTime(e, elem){
+        this.props.dispatch(changeTimerTime(elem.name, elem.value));
     }
 
     render(){
@@ -40,15 +45,15 @@ class Settings extends Component{
                         <Form.Group className="app__settings-time">
                             <Form.Field>
                                 <label>H</label>
-                                <Input type="number" min="0" placeholder="00"/>
+                                <Input type="number" onChange={this.handleChangeTime} min="0" name="H" placeholder="00"/>
                             </Form.Field>
                             <Form.Field>
                                 <label>M</label>
-                                <Input type="number" min="0" placeholder="00"/>
+                                <Input type="number" onChange={this.handleChangeTime} min="0" name="M" placeholder="00"/>
                             </Form.Field>
                             <Form.Field>
                                 <label>S</label>
-                                <Input type="number" min="0" placeholder="00"/>
+                                <Input type="number" onChange={this.handleChangeTime} min="0" name="S" placeholder="00"/>
                             </Form.Field>
                         </Form.Group> : null
                     }

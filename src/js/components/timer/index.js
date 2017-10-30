@@ -37,6 +37,16 @@ class Timer extends Component{
     }
 
     render(){
+		// if(this.round){
+        //     let {ctrlStart, ctrlPause, ctrlStop} = this.props;
+        //
+        //
+        //     if(ctrlStart){
+        //         this.round.options.animation.duration =
+        //     }
+        //
+        //
+        // }
         return(
             <div className="app__timeline">
                 <canvas id="timeline"></canvas>
@@ -47,10 +57,11 @@ class Timer extends Component{
 
 let appState = (state) => {
 	return {
-		time: state.time,
-        ctrlStart: state.ctrlStart,
-		ctrlPause: state.ctrlPause,
-		ctrlStop: state.ctrlStop
+		time: state.appReducer.time,
+        ctrlStart: state.appReducer.ctrlStart,
+		ctrlPause: state.appReducer.ctrlPause,
+		ctrlStop: state.appReducer.ctrlStop,
+		timerTime: state.appReducer.timerTime
 	}
 }
 
