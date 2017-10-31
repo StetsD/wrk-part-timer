@@ -18,7 +18,6 @@ class Timer extends Component{
         let {time, timeDynamic} = this.props;
         let val = getTimePart(time, timeDynamic);
         let valColor = getSpecifyColor(+val.toFixed(1), 'code');
-        // console.log(time, timeDynamic, val, valColor)
 
         return(
             <div className="app__timeline">

@@ -9,6 +9,8 @@ import './style.scss';
 const {remote} = require('electron'),
         {dialog} = remote;
 const fs = require('fs');
+const path = require('path');
+const {config} = require('../../../config');
 
 class Settings extends Component{
     constructor(props){
@@ -31,13 +33,19 @@ class Settings extends Component{
 
     handleOpenDialogAlarm(){
         dialog.showOpenDialog({
-            filters: ['mp3', 'wav', 'ogg'],
+            filters: [{name: 'Audio', extensions: ['mp3', 'wav', 'ogg']}],
+            title: 'Select Audio',
+            defaultPath: process.env.HOME,
             properties: ['openFile']
         }, file => {
-            // let readSt = fs.createReadStream(file);
+            // console.log(fs.stat(file[0]));
+
+            let readSt = fs.createReadStream(file[0]);
+            let {base} = path.parse(readSt.path);
+            console.log(base);
             // let writeSt = fs.createWriteStream();
-            console.log(file)
-            console.log(fs.stat(file));
+            // console.log(file[0])
+
         });
     }
 

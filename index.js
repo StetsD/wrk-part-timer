@@ -1,5 +1,6 @@
 const electron = require('electron');
 const {app, BrowserWindow, dialog} = electron;
+const {config} = require('./config');
 
 var WIN;
 
@@ -9,5 +10,5 @@ app.on('ready', ()=> {
         height: 270
     });
 
-    WIN.loadURL(`file://${__dirname}/app/index.html`);
+    WIN.loadURL(`file://${config.paths.app}/index.html`);
 });

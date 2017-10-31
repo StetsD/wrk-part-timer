@@ -1,7 +1,10 @@
 const path = require('path');
+const {config} = require('../../../config');
+const defaultAudioEnd = '/public/assets/default/finish.mp3';
+
 const audioPath = window.process ?
-	path.normalize(`${window.process.cwd()}/app/public/assets/default/finish.mp3`) :
-	'/public/assets/default/finish.mp3';
+	path.normalize(`${config.paths.app}${defaultAudioEnd}`) :
+	defaultAudioEnd;
 
 
 export default class AudioPlayer{

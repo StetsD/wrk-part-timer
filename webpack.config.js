@@ -1,3 +1,4 @@
+const {config} = require('./config');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -26,15 +27,15 @@ const ProvidePlugin = new webpack.ProvidePlugin({
 
 const copyWebpackPlugin = new CopyWebpackPlugin([
     {
-        from: path.normalize(`${__dirname}/assets/**/*`),
-        to: path.normalize(`${__dirname}/app/public/`)
+        from: `${config.paths.assets}/**/*`,
+        to: config.paths.public
     }
 ]);
 
 module.exports = {
-    entry: path.normalize(`${__dirname}/src/index.js`),
+    entry: `${config.paths.src}/index.js`,
     output: {
-        path: path.resolve(__dirname, 'app'),
+        path: config.paths.app,
         filename: '[name].bundle.js'
     },
     devtool: 'eval-source-map',
@@ -51,7 +52,7 @@ module.exports = {
             ]},
             {test: /\.(mp3|wav|ogg)$/, loader: 'file-loader', options: {
                 name: '[name].[ext]',
-                outputPath: path.normalize(`${__dirname}/app/public/`),
+                outputPath: config.paths.public,
                 useRelativePath: getMode()
             }}
         ]
@@ -66,7 +67,4 @@ module.exports = {
         }
     },
     target: 'electron'
-    // node: {
-    //     fs: 'empty'
-    // }
 }
