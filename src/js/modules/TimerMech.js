@@ -9,7 +9,7 @@ export default class TimerMech{
 		this.stopwatch;
 	}
 
-	initTimer(summary, dispatch, tickAction){
+	initTimer(summary, dispatch, tickAction, endAction){
 		let that = this;
 
 		if(summary){
@@ -22,7 +22,10 @@ export default class TimerMech{
 				dispatch(tickAction());
 				that.timer = setTimeout(run, 1000);
 
-				store.getState().appReducer.timeDynamic === 0 && that.destroyTimer();
+				if(store.getState().appReducer.timeDynamic === 0){
+					that.destroyTimer();
+					dispatch(endAction());
+				}
 			}, 1000);
 		}
 	}

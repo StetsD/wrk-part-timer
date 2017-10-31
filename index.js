@@ -5,8 +5,8 @@ var WIN;
 
 app.on('ready', ()=> {
     WIN = new BrowserWindow({
-        width: 400,
-        height: 400
+        width: 775,
+        height: 210
     });
 
     WIN.loadURL(`file://${__dirname}/app/index.html`);

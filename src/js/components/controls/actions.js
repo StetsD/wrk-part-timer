@@ -2,6 +2,7 @@ export const START = 'START';
 export const PAUSE = 'PAUSE';
 export const STOP = 'STOP';
 export const TICK = 'TICK';
+export const END = 'END';
 
 export function start(summary){
 	return {
@@ -17,7 +18,7 @@ export function pause(){
 }
 
 export function stop(){
-	return{ 
+	return{
 		type: STOP
 	}
 }
@@ -26,5 +27,11 @@ export function tick(val){
 	return{
 		type: TICK,
 		val
+	}
+}
+
+export function end(){
+	return{
+		type: END
 	}
 }

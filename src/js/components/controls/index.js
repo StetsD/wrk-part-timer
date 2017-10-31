@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Button} from 'semantic-ui-react';
-import {start, pause, stop, tick} from './actions';
+import {start, pause, stop, tick, end} from './actions';
 import {secSummary} from '../../modules/customizeModule';
 import TimerMech from '../../modules/TimerMech';
 import './style.scss';
@@ -30,7 +30,7 @@ class Controls extends Component{
 
         switch(type){
             case 'play':
-                mode === 'timer' && timerMech.initTimer(timeCorrect, this.props.dispatch.bind(this), tick);
+                mode === 'timer' && timerMech.initTimer(timeCorrect, this.props.dispatch.bind(this), tick, end);
                 mode === 'timer-chain' && timerMech.initTimerChain();
                 mode === 'stopwatch' && timerMech.initStopwatch();
                 this.props.dispatch(start(summary));

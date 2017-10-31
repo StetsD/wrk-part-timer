@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, dispatch} from 'react-redux';
-import {Timer, Settings, Values, Controls} from './components/';
+import {Timer, Settings, Values, Controls, ModalEnd} from './components/';
 import AudioPlayer from './modules/AudioPlayer';
 
 class App extends Component{
@@ -11,12 +11,17 @@ class App extends Component{
 
 	componentDidMount(){
         this.player = new AudioPlayer({
-            elem: document.getElementById('audio-finish')
+            audio: document.getElementById('audio-finish')
         });
-        window.player = this.player;
+
 	}
 
     render(){
+        let {ctrlEnd} = this.props.appReducer;
+        this.player ?
+            ctrlEnd ? this.player.play() : this.player.stop()
+            : null;
+
         return(
             <div className="app">
 				<div className="app__inner">
@@ -26,8 +31,11 @@ class App extends Component{
                         <Values/>
                     </div>
                     <Settings/>
+                    <ModalEnd/>
 				</div>
-				<audio id="audio-finish"></audio>
+				<audio id="audio-finish">
+                    <source id="audio-finish-src" type="audio/mp3"></source>
+                </audio>
             </div>
         )
     }
