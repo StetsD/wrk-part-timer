@@ -5,11 +5,17 @@ import {Form, Radio, Input, Button} from 'semantic-ui-react';
 import {changeMode, changeTimerTime} from './actions';
 import './style.scss';
 
+//Electron mech
+const {remote} = require('electron'),
+        {dialog} = remote;
+const fs = require('fs');
+
 class Settings extends Component{
     constructor(props){
         super(props);
         this.handleChangeMode = this.handleChangeMode.bind(this);
         this.handleChangeTime = this.handleChangeTime.bind(this);
+        this.handleOpenDialogAlarm = this.handleOpenDialogAlarm.bind(this);
         this.state = {
             timerTime: {
                 H: 0,
@@ -23,7 +29,17 @@ class Settings extends Component{
         dispatch: PropTypes.func.isRequired
     }
 
-
+    handleOpenDialogAlarm(){
+        dialog.showOpenDialog({
+            filters: ['mp3', 'wav', 'ogg'],
+            properties: ['openFile']
+        }, file => {
+            // let readSt = fs.createReadStream(file);
+            // let writeSt = fs.createWriteStream();
+            console.log(file)
+            console.log(fs.stat(file));
+        });
+    }
 
     handleChangeMode(e, {value}){
 		this.props.dispatch(changeMode(value));
@@ -90,7 +106,7 @@ class Settings extends Component{
                         {mode === 'timer' ?
                             <Form.Group className="app__settings-set-alarm">
                                 <Form.Field>
-                                    <Button>Set Alarm</Button>
+                                    <Button onClick={this.handleOpenDialogAlarm}>Set Alarm</Button>
                                 </Form.Field>
                             </Form.Group> : null
                         }
