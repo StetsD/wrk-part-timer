@@ -24,7 +24,7 @@ const initialState = {
 }
 
 let appReducer = (state = initialState, action) => {
-	// console.log(state, action)
+	console.log(state, action)
     switch(action.type){
         case CHANGE_MODE:
             return {...state, mode: action.payload, ctrlStop: true, ctrlPause: false, ctrlStart: false};
@@ -43,7 +43,13 @@ let appReducer = (state = initialState, action) => {
 			if(action.val){
 				return {...state, timeDynamic: action.val};
 			}
-            return {...state, timeDynamic: state.timeDynamic - 1};
+			if(action.mode === 'timer'){
+	            return {...state, timeDynamic: state.timeDynamic - 1};
+			}
+			if(action.mode === 'stopwatch'){
+				return {...state, timeDynamic: state.timeDynamic + 1};
+			}
+
 		case END:
 			return {...state, ctrlEnd: true};
 		case REFRESH:

@@ -4,10 +4,8 @@ import {connect} from 'react-redux';
 import {Button} from 'semantic-ui-react';
 import {start, pause, stop, tick, end} from './actions';
 import {secSummary} from '../../modules/customizeModule';
-import TimerMech from '../../modules/TimerMech';
+import timerMech from '../../timerMechObject';
 import './style.scss';
-
-let timerMech = new TimerMech();
 
 class Controls extends Component{
     constructor(props){
@@ -32,11 +30,13 @@ class Controls extends Component{
             case 'play':
                 mode === 'timer' && timerMech.initTimer(timeCorrect, this.props.dispatch.bind(this), tick, end);
                 mode === 'timer-chain' && timerMech.initTimerChain();
-                mode === 'stopwatch' && timerMech.initStopwatch();
+                mode === 'stopwatch' && timerMech.initStopwatch(this.props.dispatch.bind(this), tick, end);
                 this.props.dispatch(start(summary));
                 break;
             case 'pause':
                 mode === 'timer' && timerMech.pauseTimer();
+                mode === 'timer-chain' && timerMech.pauseTimerChain();
+                mode === 'stopwatch' && timerMech.pauseStopwatch();
                 this.props.dispatch(pause());
                 break;
             case 'stop':

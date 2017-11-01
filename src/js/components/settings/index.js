@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {connect, dispatch} from 'react-redux';
 import {Form, Radio, Input, Button} from 'semantic-ui-react';
 import {changeMode, changeTimerTime, error, newAudioEnd} from './actions';
+import {stop} from '../controls/actions';
+import timerMech from '../../timerMechObject';
 import './style.scss';
 
 //Electron mech
@@ -74,6 +76,8 @@ class Settings extends Component{
 
     handleChangeMode(e, {value}){
 		this.props.dispatch(changeMode(value));
+        this.props.dispatch(stop());
+        timerMech.destroyAll();
     }
 
     handleChangeTime(e, elem){
@@ -85,8 +89,13 @@ class Settings extends Component{
         this.setState({timerTime});
     }
 
+    componentDidUpdate(){
+        this.props.mode === 'timer-chain' && this.props.dispatch(error(config.msg.warning.modeTimeChain));
+    }
+
     render(){
-        let {mode, timerTime} = this.props;
+        let {mode, timerTime, ctrlPause} = this.props;
+
         return(
             <div className="app__settings">
                 <Form>
@@ -109,15 +118,15 @@ class Settings extends Component{
                             <Form.Group className="app__settings-time">
                                 <Form.Field>
                                     <label>H</label>
-                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.H} min="0" name="H" placeholder="0"/>
+                                    <Input type="number" disabled={ctrlPause} onChange={this.handleChangeTime} value={this.state.timerTime.H} min="0" name="H" placeholder="0"/>
                                 </Form.Field>
                                 <Form.Field>
                                     <label>M</label>
-                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.M} min="0" max="60" name="M" placeholder="0"/>
+                                    <Input type="number" disabled={ctrlPause} onChange={this.handleChangeTime} value={this.state.timerTime.M} min="0" max="60" name="M" placeholder="0"/>
                                 </Form.Field>
                                 <Form.Field>
                                     <label>S</label>
-                                    <Input type="number" onChange={this.handleChangeTime} value={this.state.timerTime.S} min="0" max="60" name="S" placeholder="0"/>
+                                    <Input type="number" disabled={ctrlPause} onChange={this.handleChangeTime} value={this.state.timerTime.S} min="0" max="60" name="S" placeholder="0"/>
                                 </Form.Field>
                             </Form.Group> : null
                         }
@@ -152,7 +161,8 @@ class Settings extends Component{
 let appState = (state) => {
 	return {
 		mode: state.appReducer.mode,
-        timerTime: state.appReducer.timerTime
+        timerTime: state.appReducer.timerTime,
+        ctrlPause: state.appReducer.ctrlPause
 	}
 };
 

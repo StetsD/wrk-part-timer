@@ -15,9 +15,9 @@ class Timer extends Component{
     }
 
     render(){
-        let {time, timeDynamic} = this.props;
-        let val = getTimePart(time, timeDynamic);
-        let valColor = getSpecifyColor(+val.toFixed(1), 'code');
+        let {time, timeDynamic, mode} = this.props;
+        let val = mode === 'timer' ? getTimePart(time, timeDynamic) : 0;
+        let valColor = mode === 'timer' ? getSpecifyColor(+val.toFixed(1), 'code') : '#FFFFFF';
 
         return(
             <div className="app__timeline">
@@ -35,6 +35,7 @@ class Timer extends Component{
 
 let appState = (state) => {
 	return {
+        mode: state.appReducer.mode,
 		time: state.appReducer.time,
 		timeDynamic: state.appReducer.timeDynamic
 	}

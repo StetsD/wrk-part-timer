@@ -23,10 +23,11 @@ export function stop(){
 	}
 }
 
-export function tick(val){
+export function tick(val, mode){
 	return{
 		type: TICK,
-		val
+		val,
+		mode
 	}
 }
 

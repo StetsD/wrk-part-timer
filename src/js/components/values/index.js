@@ -18,10 +18,10 @@ class Values extends Component{
 	}
 
 	render(){
-		let {ctrlStart, time, timeDynamic} = this.props;
+		let {mode, time, timeDynamic} = this.props;
 		let {hh, mm, ss} = this.parseSummaryTime(timeDynamic);
 		let val = getTimePart(time, timeDynamic);
-        let valColor = getSpecifyColor(+val.toFixed(1), 'key');
+        let valColor = mode === 'timer' ? getSpecifyColor(+val.toFixed(1), 'key') : 'black';
 
 		return(
 			<div className="app__values">
@@ -50,9 +50,7 @@ let appState = (state) => {
 	return {
 		time: state.appReducer.time,
 		timeDynamic: state.appReducer.timeDynamic,
-		ctrlStart: state.appReducer.ctrlStart,
-		ctrlPause: state.appReducer.ctrlPause,
-		ctrlStop: state.appReducer.ctrlStop
+		mode: state.appReducer.mode
 	}
 }
 

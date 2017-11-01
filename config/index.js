@@ -17,7 +17,10 @@ const config = {
         err:{
             alarmLimit: 'Your file is too big. Load file less or equal 10Mb',
 			badAudioType: 'Allowed formats are only mp3, wav, ogg'
-        }
+        },
+		warning:{
+			modeTimeChain: 'This mode is locked and developing'
+		}
     },
 	audioTypes: {
 		'.mp3': true,
