@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect, dispatch} from 'react-redux';
 import {Form, Radio, Input, Button} from 'semantic-ui-react';
-import {changeMode, changeTimerTime, error} from './actions';
+import {changeMode, changeTimerTime, error, newAudioEnd} from './actions';
 import './style.scss';
 
 //Electron mech
@@ -38,9 +38,16 @@ class Settings extends Component{
             defaultPath: process.env.HOME,
             properties: ['openFile']
         }, file => {
+            if(!file){return false}
             let readSt = fs.createReadStream(file[0]);
-            let {base} = path.parse(readSt.path);
-            let newPath = `${config.paths.appAssets}/${base}`;
+            let {base, ext} = path.parse(readSt.path);
+
+            if(!config.audioTypes[ext]){
+                this.props.dispatch(error(config.msg.err.badAudioType));
+                return false;
+            }
+
+            let newPath = path.normalize(`${config.paths.appAssets}/${base}`);
             let writeSt = fs.createWriteStream(newPath);
             var size = 0;
 
@@ -57,6 +64,11 @@ class Settings extends Component{
                     }
                 })
                 .pipe(writeSt);
+
+            writeSt
+                .on('finish', () => {
+                    fs.existsSync(newPath) && this.props.dispatch(newAudioEnd(newPath));
+                });
         });
     }
 

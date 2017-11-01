@@ -1,19 +1,23 @@
 const path = require('path');
 const {config} = require('../../../config');
-const defaultAudioEnd = '/public/assets/default/finish.mp3';
-
-const audioPath = window.process ?
-	path.normalize(`${config.paths.appAssets}/default/finish.mp3`) :
-	defaultAudioEnd;
-
 
 export default class AudioPlayer{
 	constructor(props){
 		this.audio = props.audio;
 		this.src = props.audio.querySelector('source')
-		this.srcFinish = props.srcFinish || audioPath;
+		this.srcFinish = props.srcFinish || config.paths.defaultAudioEnd;
 
 		this.src.src = this.srcFinish;
+	}
+
+	setAudioEnd(path, cb){
+		this.src.src = path;
+		this.audio.load();
+		cb && cb();
+	}
+
+	getAudioEnd(){
+		return this.src.src;
 	}
 
 	play(){

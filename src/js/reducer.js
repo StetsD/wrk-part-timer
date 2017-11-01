@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 import _ from 'lodash';
-import {CHANGE_MODE, CHANGE_TIMER_TIME, ERROR} from './components/settings/actions';
+import {CHANGE_MODE, CHANGE_TIMER_TIME, ERROR, NEW_AUDIO_END} from './components/settings/actions';
 import {START, PAUSE, STOP, TICK, END} from './components/controls/actions';
 import {REFRESH} from './components/modal/actions';
+import {config} from '../../config';
 
 const initialState = {
 	mode: 'timer',
@@ -14,6 +15,7 @@ const initialState = {
     ctrlStop: false,
 	ctrlEnd: false,
 	err: '',
+	newAudioEnd: config.paths.defaultAudioEnd,
     timerTime: {
         H: 0,
         M: 0,
@@ -45,9 +47,11 @@ let appReducer = (state = initialState, action) => {
 		case END:
 			return {...state, ctrlEnd: true};
 		case REFRESH:
-			return {...state, ctrlEnd: false, err: ''};
+			return {...state, ctrlEnd: false, err: '', newAudioEnd: ''};
         case ERROR:
             return {...state, err: action.err};
+		case NEW_AUDIO_END:
+			return {...state, newAudioEnd: action.path}
         default:
             return state;
     }
