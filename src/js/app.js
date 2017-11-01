@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, dispatch} from 'react-redux';
-import {Timer, Settings, Values, Controls, ModalEnd} from './components/';
+import {Timer, Settings, Values, Controls, ModalEnd, ModalDef} from './components/';
 import AudioPlayer from './modules/AudioPlayer';
 
 class App extends Component{
@@ -17,7 +17,7 @@ class App extends Component{
 	}
 
     render(){
-        let {ctrlEnd} = this.props.appReducer;
+        let {ctrlEnd, err} = this.props.appReducer;
         this.player ?
             ctrlEnd ? this.player.play() : this.player.stop()
             : null;
@@ -32,6 +32,7 @@ class App extends Component{
                     </div>
                     <Settings/>
                     <ModalEnd/>
+                    <ModalDef/>
 				</div>
 				<audio id="audio-finish">
                     <source id="audio-finish-src" type="audio/mp3"></source>

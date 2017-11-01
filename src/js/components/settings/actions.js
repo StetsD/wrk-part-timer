@@ -1,5 +1,6 @@
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CHANGE_TIMER_TIME = 'CHANGE_TIMER_TIME';
+export const ERROR = 'ERROR';
 
 export function changeMode(mode){
 	return{
@@ -13,4 +14,11 @@ export function changeTimerTime(type, val){
 		type: CHANGE_TIMER_TIME,
 		payload: {type, val}
 	}
+}
+
+export function error(err){
+    return {
+        type: ERROR,
+        err
+    }
 }

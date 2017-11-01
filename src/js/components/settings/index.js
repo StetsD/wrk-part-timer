@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect, dispatch} from 'react-redux';
 import {Form, Radio, Input, Button} from 'semantic-ui-react';
-import {changeMode, changeTimerTime} from './actions';
+import {changeMode, changeTimerTime, error} from './actions';
 import './style.scss';
 
 //Electron mech
@@ -10,7 +10,7 @@ const {remote} = require('electron'),
         {dialog} = remote;
 const fs = require('fs');
 const path = require('path');
-const {config} = require('../../../config');
+const {config} = require('../../../../config');
 
 class Settings extends Component{
     constructor(props){
@@ -38,14 +38,25 @@ class Settings extends Component{
             defaultPath: process.env.HOME,
             properties: ['openFile']
         }, file => {
-            // console.log(fs.stat(file[0]));
-
             let readSt = fs.createReadStream(file[0]);
             let {base} = path.parse(readSt.path);
-            console.log(base);
-            // let writeSt = fs.createWriteStream();
-            // console.log(file[0])
+            let newPath = `${config.paths.appAssets}/${base}`;
+            let writeSt = fs.createWriteStream(newPath);
+            var size = 0;
 
+            readSt
+                .on('data', data => {
+                    size += data.length;
+                    if(size > config.endAlarmSizeLimit){
+                        writeSt.destroy();
+                        if(fs.existsSync(newPath)){
+                            fs.unlinkSync(newPath);
+                            this.props.dispatch(error(config.msg.err.alarmLimit));
+                        }
+                        throw new Error(config.msg.err.alarmLimit);
+                    }
+                })
+                .pipe(writeSt);
         });
     }
 

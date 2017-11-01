@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 import _ from 'lodash';
-import {CHANGE_MODE, CHANGE_TIMER_TIME} from './components/settings/actions';
+import {CHANGE_MODE, CHANGE_TIMER_TIME, ERROR} from './components/settings/actions';
 import {START, PAUSE, STOP, TICK, END} from './components/controls/actions';
 import {REFRESH} from './components/modal/actions';
 
@@ -13,6 +13,7 @@ const initialState = {
     ctrlPause: false,
     ctrlStop: false,
 	ctrlEnd: false,
+	err: '',
     timerTime: {
         H: 0,
         M: 0,
@@ -44,7 +45,9 @@ let appReducer = (state = initialState, action) => {
 		case END:
 			return {...state, ctrlEnd: true};
 		case REFRESH:
-			return {...state, ctrlEnd: false};
+			return {...state, ctrlEnd: false, err: ''};
+        case ERROR:
+            return {...state, err: action.err};
         default:
             return state;
     }
