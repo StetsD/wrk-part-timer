@@ -11,7 +11,7 @@ app.on('ready', ()=> {
         resizable: false
     });
 
-    // WIN.setMenu(null);
+    WIN.setMenu(null);
 
     WIN.loadURL(`file://${config.paths.app}/index.html`);
 });
