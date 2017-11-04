@@ -7,8 +7,9 @@
     "start": "electron index.js",
     "compile": "cross-env NODE_ENV=prod webpack",
     "dev": "cross-env NODE_ENV=dev webpack-dev-server",
-    "build": "electron-packager . wkr-part-timer",
-    "rebuild": "electron-packager . wkr-part-timer --overwrite"
+    "build": "electron-packager . wkr-part-timer --ignore=node_modules/electron-*",
+    "rebuild": "electron-packager . wkr-part-timer --overwrite",
+    "pack": "asar pack wkr-part-timer-win32-x64/resources/electron.asar pack"
   },
   "repository": {
     "type": "git",

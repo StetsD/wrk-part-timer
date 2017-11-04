@@ -1,8 +1,8 @@
 var electronInstaller = require('electron-winstaller');
 
 resultPromise = electronInstaller.createWindowsInstaller({
-	appDirectory: './',
-    outputDirectory: '/winin',
+	appDirectory: './wkr-part-timer-win32-x64',
+    outputDirectory: `./winin/`,
     authors: 'StetsD',
     exe: 'wkr-part-timer.exe',
     loadingGif: './ico/setup.gif',
@@ -13,4 +13,4 @@ resultPromise = electronInstaller.createWindowsInstaller({
     setupIcon: './ico/icon.ico'
 });
 
-resultPromise.then(() => console.log("It worked"), e => console.log(e.message));
+resultPromise.then(() => console.log("It worked"), e => {console.log(e.message.toString('utf8'))});
