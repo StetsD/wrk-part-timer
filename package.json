@@ -7,7 +7,8 @@
     "start": "electron index.js",
     "compile": "cross-env NODE_ENV=prod webpack",
     "dev": "cross-env NODE_ENV=dev webpack-dev-server",
-    "build": "electron-packager ."
+    "build": "electron-packager . wkr-part-timer",
+    "rebuild": "electron-packager . wkr-part-timer --overwrite"
   },
   "repository": {
     "type": "git",
@@ -36,8 +37,9 @@
     "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
-    "electron-packager": "^9.1.0",
     "electron": "^1.7.9",
+    "electron-packager": "^9.1.0",
+    "electron-winstaller": "^2.6.3",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",

@@ -24,7 +24,7 @@ const initialState = {
 }
 
 let appReducer = (state = initialState, action) => {
-	console.log(state, action)
+	// console.log(state, action)
     switch(action.type){
         case CHANGE_MODE:
             return {...state, mode: action.payload, ctrlStop: true, ctrlPause: false, ctrlStart: false};

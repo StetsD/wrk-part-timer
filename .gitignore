@@ -42,6 +42,7 @@ Thumbs.db
 ######################
 
 .idea/
+wkr-part-timer-win32-x64/
 node_modules/
 app/
 npm-debug.log.*

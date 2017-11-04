@@ -33,7 +33,7 @@ export default class TimerMech{
 	}
 
 	initTimerChain(){
-		console.log('init timer-chain');
+		
 	}
 
 	initStopwatch(dispatch, tickAction, endAction){

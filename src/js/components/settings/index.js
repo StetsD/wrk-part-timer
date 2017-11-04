@@ -49,7 +49,7 @@ class Settings extends Component{
                 return false;
             }
 
-            let newPath = path.normalize(`${config.paths.appAssets}/${base}`);
+            let newPath = path.normalize(`${global.__dirname}/public/assets/${base}`);
             let writeSt = fs.createWriteStream(newPath);
             var size = 0;
 

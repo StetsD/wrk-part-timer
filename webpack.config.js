@@ -38,6 +38,10 @@ module.exports = {
         path: config.paths.app,
         filename: '[name].bundle.js'
     },
+    // node: {
+    //     __dirname: false,
+    //     __filename: false
+    // },
     devtool: 'eval-source-map',
     module: {
         loaders: [
